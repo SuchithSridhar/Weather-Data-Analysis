@@ -149,38 +149,34 @@ def plot_graph_1(plot_type, top_label, y_label):
                      'Ratnagiri',
                      'Aurangabad',
                      'Ichalkaranji']
-
     data = final_data()
-
     x_labels = [str(x)+":00" for x in range(0, 24, 3)]
-
     y_plots = []
-
     # {[{[]},],}
-
     for city in close_and_far:
-
         day = data[city][0]
         y_plots.append(day[plot_type])
-
     count = 1
     x_vals = [x for x in range(8)]
     for plots in y_plots:
         if count < 4:
             color = 'g'
+            label = 'Close to sea'
         else:
             color = 'r'
+            label = "Far from sea"
         print(count, color, plots)
-        plt.plot(x_vals, plots, color=color)
-
+        if count in (3, 4):
+            plt.plot(x_vals, plots, color=color, label=label)
+        else:
+            plt.plot(x_vals, plots, color=color)
         count += 1
-
     plt.title(top_label)
-
     plt.xlabel("Time")
     plt.ylabel(y_label)
     plt.xticks(np.arange(8), x_labels, rotation=290)
     plt.grid(True)
+    plt.legend()
     plt.show()
 
 
@@ -272,8 +268,31 @@ def plot_graph_2(max_min, plot_type, title, y_label):
     x = np.linspace(0, 300, 31)
     plt.plot(x, line1(x), x, line2(x), result, line1(result), 'ro')
 
+    plt.legend()
     plt.grid(True)
     plt.show()
 
 
-pprint(clean_data(load_city_data('Mumbai')))
+def main():
+    plot_graph_1('temperature',
+                 'Temperature of Six Cities\n3 far from sea and 3 close',
+                 'Temp in C')
+    plot_graph_2('max', 'temperature',
+                 " Max Temperature of 10 cities",
+                 "Temp in C")
+    plot_graph_2('min', 'temperature',
+                 " Min Temperature of 10 cities",
+                 "Temp in C")
+    plot_graph_1('humidity',
+                 'Humidity of Six Cities\n3 far from sea and 3 close',
+                 'Humidity')
+    plot_graph_2('max', 'humidity',
+                 " Max Humidity of 10 cities",
+                 "Humidity")
+    plot_graph_2('min', 'humidity',
+                 " Min Humidity of 10 cities",
+                 "Humidity")
+
+
+if __name__ == '__main__':
+    main()
