@@ -36,12 +36,12 @@ distances = {
 dates = [x for x in range(1, 21)]
 
 
-def get_data(city, date1='2019-07-01', date2='2019-07-20'):
+def get_data(city, date1='2019-07-01', date2='2019-07-20', api_key = ''):
     api_link = ('http://api.worldweatheronline.com/premium/v1/past-weather' +
-                '.ashx?key=4834833263ea462cbde143124190708&q={}' +
+                '.ashx?key={}&q={}' +
                 '&format=json&date={}&enddate={}')
     try:
-        values = requests.get(api_link.format(city, date1, date2))
+        values = requests.get(api_link.format(api_key, city, date1, date2))
     except:
         print("Invalid City")
         return 0
