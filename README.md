@@ -1,6 +1,8 @@
 # Weather-Data-Analysis
 Analyzing weather data of Maharashtra's cities to see if the sea affects the weather.
 
+Note: The api_key has been deactivated
+
 
 The program has 2 ways to load the data of the cities we analyze into the program,
 the default way loads them in from the notepad files. However, one can also 
